@@ -24,10 +24,10 @@ This skill automates daily job hunting across 8 platforms and 3 career tracks. I
 
 Users only need to provide their information, either by sending documents or answering guided questions.
 
-Data directory structure (auto-created on first run):
+Default data directory: `~/job-hunting/` (user's home directory, auto-created on first run). If the user specifies a custom path during onboarding, use that instead.
 
 ```
-job-hunting/
+~/job-hunting/
 ├── personal_info/          # User profile + resume data + template
 ├── search_config/          # Search criteria
 ├── daily_reports/          # Daily report output
@@ -127,12 +127,20 @@ Once all data is saved, the agent automatically:
    - Salary range (record "Negotiable" if not listed)
    - **Full URL link** (mandatory — do not omit)
    - Source platform
+   - **Link type**: Mark as `[非官方链接]` if the URL points to an aggregator/repost site (not the official platform job page)
 
-4. **For top matching candidates (e.g., top 10 by relevance)**: Use WebFetch on the job detail page URL to extract:
+4. **Low-result retry rule**: If total valid results across all searches < 5, retry once with alternative keywords:
+   - Replace primary role with synonyms (e.g., "大模型产品" → "LLM产品"/"AI平台产品")
+   - Add "急聘"/"高薪" modifiers
+   - If still < 5 after retry, note in the report: "⚠️ 今日搜索结果较少，已尝试换词重搜"
+
+5. **For top matching candidates (e.g., top 10 by relevance)**: Use WebFetch on the job detail page URL to extract:
    - Post time (e.g., "Posted 2 days ago", "Updated 7/22")
    - Recruiter last active time (e.g., "Active today", "1 day ago", "Active within 3 days")
 
-   WebFetch prompt template: "Extract: 1. Job posting time / last update time 2. Recruiter/HR last active time". If the page requires login or is inaccessible, note "Login required".
+   WebFetch prompt template: "Extract: 1. Job posting time / last update time 2. Recruiter/HR last active time".
+   - If the page requires login or is inaccessible → mark as "详情需手动查看" and **keep the link**.
+   - WebFetch failure must NOT block the pipeline — proceed with available data.
 
 ### Phase 2: Deduplication & Tracking
 
@@ -217,10 +225,25 @@ Write to `daily_reports/YYYY-MM-DD.md`. Use two-part format: TOP 3 detailed + fu
 **Critical formatting rules:**
 - URLs must be **full, plain text** — no markdown link syntax — so users can copy-paste directly
 - Post time: prefer relative ("1 day ago", "today"), fallback to date ("7/22")
-- Recruiter activity: always display if available ("Active today" > "1 day ago" > "within 3 days"). Note "Login required" if inaccessible
+- Recruiter activity: always display if available ("Active today" > "1 day ago" > "within 3 days"). Note "详情需手动查看" if inaccessible
 - Match column: format as `XX% one-line reason` (e.g., "90% Agent experience directly relevant")
 - TOP 3 get dedicated card-style entries with recruiter activity and match analysis
 - All three tracks are presented as separate sections in the overview
+
+**Empty report warning**: If zero valid jobs are found after all searches and retries, generate a minimal report with this warning:
+
+```
+# Job Hunting Daily Report - YYYY-MM-DD
+
+⚠️ 今日搜索未返回有效结果
+
+可能原因：
+- 搜索关键词受限（平台算法变更）
+- 当日无匹配岗位上新
+- 平台反爬策略升级
+
+建议：手动访问各平台确认，或调整搜索关键词后重试。
+```
 
 ### Phase 4: Resume Customization (Triggered by JD)
 
