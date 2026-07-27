@@ -123,7 +123,12 @@ def fill_template(template, data):
         '{{EDU_DATE}}': edu.get('date', ''),
     })
 
+    # Optional: woshipm profile link
+    woshipm_url = data.get('woshipm', '')
+    woshipm_section = f'<span>|</span>\n    <a href="{woshipm_url}">人人都是产品经理</a>' if woshipm_url else ''
+
     result = template
+    replacements['{{WOSHIPM_SECTION}}'] = woshipm_section
     for placeholder, value in replacements.items():
         result = result.replace(placeholder, value)
 

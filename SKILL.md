@@ -266,6 +266,7 @@ The resume template uses `{{PLACEHOLDER}}` syntax (see `references/resume_templa
 
 - `{{NAME}}`, `{{NAME_EN}}`, `{{TITLE}}` — header info
 - `{{PHONE}}`, `{{EMAIL}}`, `{{WEBSITE}}`, `{{GITHUB}}` — contact info
+- `{{WOSHIPM_SECTION}}` — optional woshipm.com profile link (hidden if empty)
 - `{{SUMMARY_ITEMS}}` — key strengths `<li>` items
 - `{{EXPERIENCE_ITEMS}}` — work experience blocks
 - `{{PROJECT_ITEMS}}` — selected project blocks

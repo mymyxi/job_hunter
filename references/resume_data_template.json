@@ -7,6 +7,7 @@
   "email": "YOUR_EMAIL",
   "website": "YOUR_WEBSITE_OR_PORTFOLIO",
   "github": "YOUR_GITHUB_URL",
+  "woshipm": "YOUR_WOSHIPM_PROFILE_URL_(optional,_leave_empty_to_hide)",
   "education": {
     "school": "YOUR_UNIVERSITY",
     "major": "YOUR_MAJOR",
