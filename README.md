@@ -35,34 +35,20 @@ Paired with an AI resume generator: drop in a JD, get a tailored HTML resume bac
 
 ## 🚀 Quick Start
 
-### 1. Install the Skill
-
 ```bash
-# Clone or copy to your WorkBuddy skills directory
 cp -r job-hunting-daily-search ~/.workbuddy/skills/
 ```
 
-### 2. Configure Your Profile (Two Options)
+Then say **"帮我配置求职"**. The agent handles everything:
 
-**Option A — Send documents** (fastest):
-Say "Help me set up job hunting" in WorkBuddy, then send your resume/CV files. The skill will extract your info automatically.
+| You do | Agent does |
+|--------|-----------|
+| Send docs *or* answer a few questions | Extract your profile + resume data |
+| Confirm it looks right | Save to the right place |
+| — | Create SQLite database |
+| — | Schedule daily 9 AM automation |
 
-**Option B — Guided Q&A** (conversational):
-Say "Help me set up job hunting" and answer the questions step by step. Covers: basic info → job preferences → career experience.
-
-**Option C — Manual** (advanced):
-Edit `references/profile.md` and `personal_info/resume_data.json` directly using the templates.
-
-### 3. That's it.
-
-After `cp -r`, just say **"帮我配置求职"** in WorkBuddy. The agent will:
-- 🔍 Detect what data is missing
-- 💬 Ask you questions or accept your documents
-- 🗄️ Auto-create the SQLite database
-- ⏰ Auto-schedule the daily 9 AM automation
-- ✅ Confirm everything is ready
-
-No manual JSON editing. No CLI commands. No automation setup. The agent does it all.
+Done. First report runs tomorrow at 9 AM.
 
 ---
 
@@ -83,21 +69,6 @@ job-hunting-daily-search/
 │   ├── resume_data_template.json      # JSON resume data template
 │   └── daily_report_template.md       # Daily report format reference
 └── assets/                            # Reserved for custom assets
-```
-
-### Recommended Runtime Directory
-
-The skill uses a runtime data directory you specify:
-
-```
-job-hunting/
-├── personal_info/          # Your profile + resume data + template
-├── search_config/          # Search criteria
-├── daily_reports/          # Daily reports output
-├── jds/                    # Saved JDs
-├── resumes/                # Generated resumes
-└── database/
-    └── jobs.db             # SQLite tracking database
 ```
 
 ---
