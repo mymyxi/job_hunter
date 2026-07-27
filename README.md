@@ -53,17 +53,16 @@ Say "Help me set up job hunting" and answer the questions step by step. Covers: 
 **Option C — Manual** (advanced):
 Edit `references/profile.md` and `personal_info/resume_data.json` directly using the templates.
 
-### 3. Initialize the Database
+### 3. That's it.
 
-```bash
-python3 scripts/init_db.py --db-path /your/path/jobs.db
-```
+After `cp -r`, just say **"帮我配置求职"** in WorkBuddy. The agent will:
+- 🔍 Detect what data is missing
+- 💬 Ask you questions or accept your documents
+- 🗄️ Auto-create the SQLite database
+- ⏰ Auto-schedule the daily 9 AM automation
+- ✅ Confirm everything is ready
 
-### 4. Create the Daily Automation
-
-In WorkBuddy, create an automation with:
-- **Schedule**: `FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=9;BYMINUTE=0`
-- **Prompt**: The search workflow defined in `SKILL.md`
+No manual JSON editing. No CLI commands. No automation setup. The agent does it all.
 
 ---
 

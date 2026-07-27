@@ -20,13 +20,11 @@ This skill automates daily job hunting across 8 platforms and 3 career tracks. I
 
 ## Prerequisites
 
-The skill needs user data to work — but users don't have to fill in JSON templates manually. Two onboarding paths are available (see Phase 0).
+**Just install the skill.** Everything else — database creation, automation scheduling, profile setup — is handled automatically during onboarding (Phase 0). No manual config files, no CLI scripts needed.
 
-1. **Database** — Run `scripts/init_db.py --db-path <path>` to create the SQLite tracking database
-2. **Resume template** — `references/resume_template.html` is provided; users can bring their own
-3. **WorkBuddy automation** — Configure a recurring automation with RRULE: `FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=9;BYMINUTE=0`
+Users only need to provide their information, either by sending documents or answering guided questions.
 
-Data directory structure (user-configurable paths):
+Data directory structure (auto-created on first run):
 
 ```
 job-hunting/
@@ -96,9 +94,11 @@ After each stage, summarize back and confirm before moving to the next. After al
 - `references/profile.md` (or configured path)
 - `personal_info/resume_data.json` (or configured path)
 
-**Onboarding complete signal**: Once all data is saved, tell the user:
-> "Data ready! Now let's set up your daily automation. Where should I save your daily reports and database?"
-Then proceed to create the database and configure the automation.
+**Onboarding complete — agent auto-actions**:
+Once all data is saved, the agent automatically:
+1. Creates the SQLite database in the user's chosen directory (runs `CREATE TABLE IF NOT EXISTS` inline, no script needed)
+2. Sets up the daily 9 AM recurring automation via WorkBuddy scheduling
+3. Confirms: "Everything is ready. Your first daily report will run tomorrow at 9 AM."
 
 ### Phase 1: Daily Search
 
