@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{NAME}} - {{TITLE}}</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    font-size: 13px; line-height: 1.7; color: #2c2c2c;
+    background: #fff; max-width: 210mm; margin: 0 auto; padding: 20mm 22mm;
+  }
+  .header { text-align: center; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid #e0e0e0; }
+  .header h1 { font-size: 26px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header .subtitle { font-size: 14px; color: #555; margin-bottom: 10px; }
+  .header .contact { font-size: 12px; color: #777; }
+  .header .contact span { margin: 0 8px; }
+  .header .contact a { color: #2c5aa0; text-decoration: none; }
+  .section { margin-bottom: 20px; }
+  .section-title { font-size: 15px; font-weight: 600; color: #1a1a1a; padding-bottom: 6px; border-bottom: 1.5px solid #2c5aa0; margin-bottom: 12px; letter-spacing: 0.5px; }
+  .summary-list { list-style: none; padding: 0; }
+  .summary-list li { position: relative; padding-left: 14px; margin-bottom: 4px; font-size: 13px; line-height: 1.6; }
+  .summary-list li::before { content: ""; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; background: #2c5aa0; border-radius: 50%; }
+  .exp-item { margin-bottom: 14px; }
+  .exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .exp-header .company { font-weight: 600; font-size: 14px; }
+  .exp-header .role { font-size: 13px; color: #555; margin-left: 8px; }
+  .exp-header .date { font-size: 12px; color: #999; white-space: nowrap; }
+  .exp-detail { font-size: 13px; color: #444; line-height: 1.65; }
+  .exp-detail ul { list-style: none; padding: 0; }
+  .exp-detail ul li { position: relative; padding-left: 14px; margin-bottom: 3px; }
+  .exp-detail ul li::before { content: "\2014"; position: absolute; left: 0; color: #999; font-size: 11px; }
+  .proj-item { margin-bottom: 12px; }
+  .proj-header { font-weight: 600; font-size: 13px; margin-bottom: 3px; }
+  .proj-header .proj-role { font-weight: 400; color: #777; font-size: 12px; margin-left: 6px; }
+  .proj-detail { font-size: 12px; color: #555; line-height: 1.6; }
+  .proj-detail ul { list-style: none; padding: 0; }
+  .proj-detail ul li { position: relative; padding-left: 14px; margin-bottom: 2px; }
+  .proj-detail ul li::before { content: "\2014"; position: absolute; left: 0; color: #bbb; font-size: 11px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag { font-size: 12px; padding: 2px 10px; border: 0.5px solid #ccc; border-radius: 3px; color: #444; background: #fafafa; }
+  .skill-category { margin-bottom: 8px; }
+  .skill-category .label { font-weight: 600; font-size: 12px; color: #555; margin-bottom: 4px; }
+  .edu-item { margin-bottom: 4px; }
+  .edu-item .school { font-weight: 600; font-size: 13px; }
+  .edu-item .major { font-size: 13px; color: #555; margin-left: 6px; }
+  .edu-item .date { font-size: 12px; color: #999; }
+  .honor-list { list-style: none; padding: 0; }
+  .honor-list li { position: relative; padding-left: 14px; margin-bottom: 3px; font-size: 12px; color: #555; }
+  .honor-list li::before { content: ""; position: absolute; left: 0; top: 7px; width: 4px; height: 4px; background: #2c5aa0; border-radius: 50%; }
+  strong { color: #1a1a1a; }
+  .highlight { color: #2c5aa0; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- ====== HEADER ====== -->
+<div class="header">
+  <!-- Replace {{...}} placeholders with actual values when generating -->
+  <h1>{{NAME}} {{NAME_EN}}</h1>
+  <div class="subtitle">{{TITLE}}</div>
+  <div class="contact">
+    {{PHONE}}<span>|</span>{{EMAIL}}<span>|</span>
+    <a href="{{WEBSITE}}">{{WEBSITE}}</a><span>|</span>
+    <a href="{{GITHUB}}">{{GITHUB}}</a>
+  </div>
+</div>
+
+<!-- ====== KEY STRENGTHS ====== -->
+<div class="section">
+  <div class="section-title">Key Strengths</div>
+  <ul class="summary-list">
+    {{SUMMARY_ITEMS}}
+  </ul>
+</div>
+
+<!-- ====== WORK EXPERIENCE ====== -->
+<div class="section">
+  <div class="section-title">Work Experience</div>
+  {{EXPERIENCE_ITEMS}}
+</div>
+
+<!-- ====== SELECTED PROJECTS ====== -->
+<div class="section">
+  <div class="section-title">Selected Projects</div>
+  {{PROJECT_ITEMS}}
+</div>
+
+<!-- ====== SKILLS ====== -->
+<div class="section">
+  <div class="section-title">Professional Skills</div>
+  {{SKILL_ITEMS}}
+</div>
+
+<!-- ====== EDUCATION ====== -->
+<div class="section">
+  <div class="section-title">Education</div>
+  <div class="edu-item">
+    <span class="school">{{SCHOOL}}</span>
+    <span class="major">{{MAJOR}} · {{DEGREE}}</span>
+    <span class="date">{{EDU_DATE}}</span>
+  </div>
+</div>
+
+<!-- ====== HONORS ====== -->
+<div class="section">
+  <div class="section-title">Honors & Certifications</div>
+  <ul class="honor-list">
+    {{HONOR_ITEMS}}
+  </ul>
+</div>
+
+</body>
+</html>

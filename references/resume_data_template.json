@@ -1,0 +1,69 @@
+{
+  "_comment": "Replace all values with your actual information. Use this as the base data for resume generation.",
+  "name": "YOUR_NAME",
+  "name_en": "YOUR_ENGLISH_NAME",
+  "title": "YOUR_TARGET_TITLE",
+  "phone": "YOUR_PHONE",
+  "email": "YOUR_EMAIL",
+  "website": "YOUR_WEBSITE_OR_PORTFOLIO",
+  "github": "YOUR_GITHUB_URL",
+  "education": {
+    "school": "YOUR_UNIVERSITY",
+    "major": "YOUR_MAJOR",
+    "degree": "YOUR_DEGREE",
+    "date": "YYYY.MM — YYYY.MM"
+  },
+  "summary": [
+    "X years of product experience, X years in AI, managed X-person team",
+    "Key achievement 1 with quantifiable impact",
+    "Key achievement 2 with quantifiable impact",
+    "Key achievement 3 with quantifiable impact",
+    "Notable recognition or award",
+    "Certifications and patents held"
+  ],
+  "experience": [
+    {
+      "company": "COMPANY_NAME (TICKER)",
+      "role": "YOUR_ROLE",
+      "date": "YYYY.MM — Present",
+      "details": [
+        "Responsibility and achievement 1",
+        "Responsibility and achievement 2",
+        "Responsibility and achievement 3"
+      ]
+    },
+    {
+      "company": "PREVIOUS_COMPANY (TICKER)",
+      "role": "YOUR_ROLE",
+      "date": "YYYY.MM — YYYY.MM",
+      "details": [
+        "Responsibility and achievement 1",
+        "Responsibility and achievement 2",
+        "Responsibility and achievement 3"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "企业数据仓库搭建",
+      "role": "产品负责人",
+      "date": "2023.06 — 2024.03",
+      "details": [
+        "从0到1搭建企业级数据仓库，设计ODS/DWD/DWS/ADS四层分层架构",
+        "对接16个业务系统，统一30+条业务线数据口径，日处理数据量级达TB级",
+        "搭建数据分析平台，支撑业务团队自助取数与可视化看板，报表产出效率提升3倍"
+      ]
+    }
+  ],
+  "skills": {
+    "AI_AND_LLM": ["RAG", "Agent Workflow", "NL2SQL", "LoRA Fine-tuning", "Knowledge Graph", "Multimodal CV+ASR", "Edge Computing"],
+    "DATA_AND_ENGINEERING": ["SQL", "Python", "Hive", "Spark", "Docker", "K8s", "Data Warehouse"],
+    "PRODUCT_AND_MANAGEMENT": ["Team Management", "Hardware-Software Integration", "0-to-1 Product Delivery", "PMP"]
+  },
+  "honors": [
+    "PMP Certification",
+    "X Authorized Patents",
+    "Award Name 1",
+    "Award Name 2"
+  ]
+}
