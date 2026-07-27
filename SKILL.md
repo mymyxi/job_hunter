@@ -20,13 +20,11 @@ This skill automates daily job hunting across 8 platforms and 3 career tracks. I
 
 ## Prerequisites
 
-Before using this skill, the following must be set up:
+The skill needs user data to work — but users don't have to fill in JSON templates manually. Two onboarding paths are available (see Phase 0).
 
-1. **User profile** — Fill in `references/profile_template.md` with target user's info (role, salary, city, excluded companies, etc.) and save as `references/profile.md`
-2. **Database** — Run `scripts/init_db.py --db-path <path>` to create the SQLite tracking database
-3. **Resume data** — Fill in `references/resume_data_template.json` with base resume data
-4. **Resume template** — Use `references/resume_template.html` or provide a custom HTML template with `{{PLACEHOLDER}}` syntax
-5. **WorkBuddy automation** — Configure a recurring automation with RRULE: `FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=9;BYMINUTE=0`
+1. **Database** — Run `scripts/init_db.py --db-path <path>` to create the SQLite tracking database
+2. **Resume template** — `references/resume_template.html` is provided; users can bring their own
+3. **WorkBuddy automation** — Configure a recurring automation with RRULE: `FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=9;BYMINUTE=0`
 
 Data directory structure (user-configurable paths):
 
@@ -51,6 +49,56 @@ Use this skill when:
 - User asks about their daily job hunting automation status
 
 ## Core Workflow
+
+### Phase 0: Onboarding — Data Preparation
+
+**When Phase 0 triggers**: If `references/profile.md` or `personal_info/resume_data.json` is missing or incomplete, guide the user through data preparation FIRST. Do NOT proceed to Phase 1-4 until all three data blocks are ready.
+
+**Data blocks required** (see `references/profile_template.md` and `references/resume_data_template.json` for schemas):
+
+| Block | Content | Schema |
+|-------|---------|--------|
+| Basic Info | Name, target role, experience, city, preferred platforms | `profile_template.md` §Basic Info |
+| Job Preferences | Role keywords, salary range, industries, excluded companies, search tracks | `profile_template.md` §Job Preferences |
+| Career Profile | Work experience + project experience (for resume generation) | `resume_data_template.json` |
+
+**Onboarding paths** — offer both, let user pick:
+
+#### Path A: Document Import
+User sends files (Markdown, text, PDF, Word) containing their background. Parse the documents, extract all three data blocks automatically, present a summary for user confirmation, then save to the configured paths.
+
+Example: user sends 3 Markdown files → extract basic info, work history, project experience → confirm → save.
+
+#### Path B: Guided Q&A
+Ask the user step-by-step questions in three stages. Keep it conversational — one stage at a time:
+
+**Stage 1 — Basic Info** (3-4 questions):
+> "Let's set up your profile. I'll ask a few questions."
+> 1. Your name (Chinese + English), target role?
+> 2. Total years of experience? Current employer (to exclude from search)?
+> 3. Target city? Any remote preferences?
+> 4. Languages (English level, etc.)?
+
+**Stage 2 — Job Preferences** (4-5 questions):
+> 1. What roles are you targeting? (e.g., AI Product Manager, LLM PM)
+> 2. Target salary range? (monthly or annual)
+> 3. Preferred industries? Any to exclude?
+> 4. Company preference? (Big tech / AI unicorn / SOE / all)
+> 5. Any companies to exclude?
+
+**Stage 3 — Career Profile** (open-ended):
+> "Now tell me about your experience. You can describe it freely, or send documents."
+> - Work history: company, role, dates, key achievements
+> - Key projects: name, your role, impact
+> - Key skills and certifications
+
+After each stage, summarize back and confirm before moving to the next. After all three stages, save:
+- `references/profile.md` (or configured path)
+- `personal_info/resume_data.json` (or configured path)
+
+**Onboarding complete signal**: Once all data is saved, tell the user:
+> "Data ready! Now let's set up your daily automation. Where should I save your daily reports and database?"
+Then proceed to create the database and configure the automation.
 
 ### Phase 1: Daily Search
 

@@ -42,19 +42,16 @@ Paired with an AI resume generator: drop in a JD, get a tailored HTML resume bac
 cp -r job-hunting-daily-search ~/.workbuddy/skills/
 ```
 
-### 2. Configure Your Profile
+### 2. Configure Your Profile (Two Options)
 
-Edit `references/profile.md` (or copy `references/profile_template.md`):
+**Option A — Send documents** (fastest):
+Say "Help me set up job hunting" in WorkBuddy, then send your resume/CV files. The skill will extract your info automatically.
 
-```markdown
-## Job Preferences
-| Dimension | Criteria |
-|-----------|----------|
-| Role | AI Product Manager |
-| Target Salary | 40K-70K/month |
-| Location | Beijing |
-| Excluded Companies | MyCurrentEmployer |
-```
+**Option B — Guided Q&A** (conversational):
+Say "Help me set up job hunting" and answer the questions step by step. Covers: basic info → job preferences → career experience.
+
+**Option C — Manual** (advanced):
+Edit `references/profile.md` and `personal_info/resume_data.json` directly using the templates.
 
 ### 3. Initialize the Database
 
@@ -62,15 +59,7 @@ Edit `references/profile.md` (or copy `references/profile_template.md`):
 python3 scripts/init_db.py --db-path /your/path/jobs.db
 ```
 
-### 4. Set Up Your Resume
-
-```bash
-# Copy and fill in your data
-cp references/resume_data_template.json personal_info/resume_data.json
-# Edit resume_data.json with your actual information
-```
-
-### 5. Create the Daily Automation
+### 4. Create the Daily Automation
 
 In WorkBuddy, create an automation with:
 - **Schedule**: `FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=9;BYMINUTE=0`
