@@ -60,9 +60,9 @@ job-hunting-daily-search/
 ├── README.md                          # This file
 ├── LICENSE                            # MIT
 ├── .gitignore
-├── scripts/
-│   ├── init_db.py                     # Initialize SQLite database
-│   └── generate_resume.py             # Generate HTML resume from JSON
+├── scripts/                            # Agent-use only — you never touch these
+│   ├── init_db.py                     # SQLite init (agent auto-runs)
+│   └── generate_resume.py             # JSON→HTML resume (agent auto-runs)
 ├── references/
 │   ├── profile_template.md            # User profile template (fill in your info)
 │   ├── resume_template.html           # HTML resume template ({{placeholders}})
@@ -126,14 +126,19 @@ Every report has two sections:
 3. JD keywords are extracted (Agent, RAG, LLM, multimodal, etc.)
 4. Project order is rearranged to prioritize matching experiences
 5. Skill tags and summary are adjusted to highlight JD-matching keywords
-6. Output: `resumes/Company_Role_Resume.html`
+6. Output: `resumes/Company_Role_resume.html` (auto-versioned: `_v2`, `_v3` — never overwrites)
 7. Open in browser → **Cmd+P** → Save as PDF
 
 **Template style:** Minimalist single-column, white background, linear layout — optimized for ATS and HR readability.
 
 ---
 
-## 🛠️ Scripts
+## 🛠️ Scripts (Agent-Only)
+
+These are prebuilt for the agent. **You never need to run them.** WorkBuddy handles all execution automatically during onboarding and resume generation.
+
+<details>
+<summary>📖 Script reference (click to expand)</summary>
 
 ### `init_db.py`
 Initialize the job tracking SQLite database.
@@ -153,6 +158,8 @@ python3 scripts/generate_resume.py \
 ```
 
 The script auto-opens the result in your browser. Press Cmd+P (Mac) or Ctrl+P (Windows) to save as PDF.
+
+</details>
 
 ---
 

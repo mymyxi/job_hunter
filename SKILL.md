@@ -257,7 +257,7 @@ When user provides a JD (URL or text):
    - Reorder skill tags to surface matching keywords first
    - Add JD-matching labels as visual cues
 4. Generate customized HTML using the template
-5. Output to `resumes/{Company}_{Role}_resume.html`
+5. Output to `resumes/{Company}_{Role}_resume.html`. **If the file already exists, auto-increment version**: `_v2.html`, `_v3.html`, etc. Never overwrite — user may need to compare against previous versions.
 6. Tell user: "Open in browser → Cmd+P → Save as PDF"
 
 ## Resume Template Format
@@ -297,7 +297,9 @@ To run this skill automatically:
 - `references/resume_template.html` — HTML resume template with `{{placeholders}}`
 - `references/resume_data_template.json` — JSON resume data schema; fill in with your info
 
-## Scripts
+## Scripts (Agent-Only)
 
-- `scripts/init_db.py` — Initialize the SQLite tracking database
-- `scripts/generate_resume.py` — Generate HTML resume from JSON data + template
+These are prebuilt for the agent. You never run them manually — WorkBuddy triggers them automatically.
+
+- `scripts/init_db.py` — SQLite tracking database initialization
+- `scripts/generate_resume.py` — HTML resume generation from JSON data + template
